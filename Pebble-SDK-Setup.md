@@ -4,7 +4,7 @@ ZenNotes for Pebble をソースからビルドし、時計に入れるまでの
 
 ## 必要なもの
 
-- Pebble Time 2(emery)か、gabbro の時計
+- Pebble Time 2(emery)
 - 時計とペアリングしたスマホの Pebble アプリ(Android)
 - ノートを置いた ZenNotes のサーバーと、その API トークン
 
