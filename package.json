@@ -1,0 +1,23 @@
+{
+  "name": "pebble-zennotes",
+  "author": "Rad1ally",
+  "version": "0.1.0",
+  "keywords": ["pebble-app"],
+  "private": true,
+  "dependencies": {},
+  "pebble": {
+    "displayName": "ZenNotes for Pebble",
+    "uuid": "93446959-15dc-4869-a666-ee408c0b2e09",
+    "sdkVersion": "3",
+    "enableMultiJS": true,
+    "targetPlatforms": ["emery", "gabbro"],
+    "watchapp": {
+      "watchface": false
+    },
+    "capabilities": ["configurable"],
+    "messageKeys": ["CMD", "ARG", "LEVEL", "KIND", "OFFSET", "TOTAL", "CHUNK", "TEXT", "THEME", "FONT", "STATUS", "SCROLLBAR", "LANG", "SCROLL"],
+    "resources": {
+      "media": []
+    }
+  }
+}
