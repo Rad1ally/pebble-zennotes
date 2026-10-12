@@ -6,7 +6,7 @@ Browse and read the notes on your [ZenNotes](https://zennotes.org) server ([znse
 
 This is an unofficial app. It is not made by, or affiliated with, the ZenNotes project.
 
-Built for Pebble Time 2 (emery) and gabbro. It has been tested on a Pebble Time 2 with the Android Pebble app.
+For Pebble Time 2 (emery), tested with the Android Pebble app. Round watches (gabbro) are not supported yet.
 
 ## Features
 
