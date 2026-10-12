@@ -16,7 +16,7 @@ For Pebble Time 2 (emery), tested with the Android Pebble app. Round watches (ga
 - **Code blocks**: a code block shows its first three lines and its language. Tap it, or press SELECT, to open the full block with line numbers and syntax highlighting.
 - **Links**: wikilinks (`[[Note]]`, `[[Note|label]]`) are shown in color. Tap one to open the note it links to, and press BACK to return. Links resolve the way Obsidian resolves them: by path, then a note with the same name in the same folder, then the note with that name and the shortest path.
 - **Contents**: hold SELECT on a note to list its headings and links. Pick a heading to jump to it, or a link to open that note.
-- **Images**: `![[image.png]]`, `![alt](URL)` and paths relative to the note. The phone downloads the image (PNG, JPEG, WebP, SVG and more), scales it to fit the screen, and reduces it to 64 colors before sending it to the watch.
+- **Images**: `![[image.png]]`, `![alt](URL)` and paths relative to the note. The phone downloads the image (PNG, JPEG, WebP, SVG and more), scales it to fit the screen, and reduces it to 64 colors before sending it to the watch. Web images are downloaded only when you open them, straight from their site, so that site can see your phone's IP address. Your ZenNotes token is never sent to it.
 - **Long notes**: a note over 32 KB is split into pages, with a "Continue reading" entry at the end of each page.
 - **Offline**: the note list and the last 30 notes you opened are kept on the phone. They are shown when the server can't be reached.
 - **Remembers your place**: the scroll position of each note and the last folder you opened.
