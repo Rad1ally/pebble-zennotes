@@ -49,8 +49,9 @@ var STRINGS = {
     noToken: 'スマホのアプリ設定でトークンを入れてください',
     badToken: 'トークンが正しくありません。スマホのアプリ設定で確認してください',
     serverError: 'サーバーでエラーが起きました (%s)',
+    badUrl: 'ノートが見つかりません (404)。スマホのアプリ設定でサーバーのURLを確かめてください',
     badResponse: 'サーバーの応答を読み取れませんでした',
-    offline: '接続できません。スマホのTailscaleがオンか確認してください',
+    offline: 'サーバーに接続できません。サーバーのURLとスマホの通信を確かめてください',
     timeout: 'サーバーから応答がありません。少し待ってから再読み込みしてください',
     emptyData: '空のデータです',
     noNotes: 'ノートがありません',
@@ -77,8 +78,9 @@ var STRINGS = {
     noToken: 'Enter your token in the app settings on your phone',
     badToken: 'The token was rejected. Check it in the app settings on your phone',
     serverError: 'The server returned an error (%s)',
+    badUrl: 'Notes not found (404). Check the server URL in the app settings on your phone',
     badResponse: 'Could not read the server response',
-    offline: 'Cannot connect. Check that Tailscale is on on your phone',
+    offline: 'Cannot reach the server. Check the server URL and your phone\'s connection',
     timeout: 'The server did not respond. Wait a moment and reload',
     emptyData: 'Nothing to show',
     noNotes: 'No notes',
@@ -144,13 +146,19 @@ function log(msg) {
   console.log('[zennotes] ' + msg);
 }
 
+// A server URL typed without a scheme ("notes.example.com") means HTTPS.
+function serverUrl(url) {
+  url = url.trim().replace(/\/+$/, '');
+  return url && !/^https?:\/\//i.test(url) ? 'https://' + url : url;
+}
+
 function loadSettings() {
   var cfg = {};
   try {
     cfg = JSON.parse(localStorage.getItem('settings') || '{}') || {};
   } catch (e) { /* use defaults */ }
   return {
-    server: (cfg.server || DEFAULTS.server).replace(/\/+$/, ''),
+    server: serverUrl(cfg.server || DEFAULTS.server),
     token: cfg.token || DEFAULTS.token,
     folder: (cfg.folder || DEFAULTS.folder).replace(/^\/+|\/+$/g, ''),
     theme: THEMES.hasOwnProperty(cfg.theme) ? cfg.theme : DEFAULTS.theme,
@@ -202,6 +210,11 @@ function apiGet(path, callback) {
   xhr.onload = function () {
     if (xhr.status === 401) {
       finish(t('badToken'));
+      return;
+    }
+    if (xhr.status === 404 && path === '/api/notes') {
+      // The note list is always there, so the URL doesn't point at ZenNotes.
+      finish(t('badUrl'));
       return;
     }
     if (xhr.status < 200 || xhr.status >= 300) {
@@ -1462,7 +1475,8 @@ var CONFIG_TEXT = {
   connection: ['接続', 'Connection'],
   server: ['サーバーのURL', 'Server URL'],
   token: ['トークン', 'Token'],
-  tokenHint: ['ZenNotesアプリに入れているものと同じトークン', 'The same token you use in the ZenNotes app'],
+  tokenHint: ['サーバーの認証トークン(ZENNOTES_AUTH_TOKEN)。ブラウザで ZenNotes にログインするときに貼るものと同じです',
+    'The server\'s auth token (ZENNOTES_AUTH_TOKEN), the one you paste to sign in to ZenNotes in a browser'],
   show: ['表示', 'Show'],
   hide: ['隠す', 'Hide'],
   display: ['表示', 'Display'],
