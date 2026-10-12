@@ -17,7 +17,14 @@
     "capabilities": ["configurable"],
     "messageKeys": ["CMD", "ARG", "LEVEL", "KIND", "OFFSET", "TOTAL", "CHUNK", "TEXT", "THEME", "FONT", "STATUS", "SCROLLBAR", "LANG", "SCROLL"],
     "resources": {
-      "media": []
+      "media": [
+        {
+          "type": "bitmap",
+          "name": "IMAGE_MENU_ICON",
+          "file": "images/menu_icon.png",
+          "menuIcon": true
+        }
+      ]
     }
   }
 }
