@@ -25,6 +25,7 @@
           "menuIcon": true
         }
       ]
-    }
+    },
+    "usesPermissions": ["Internet", "LocalNetwork"]
   }
 }
